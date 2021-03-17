@@ -1,0 +1,26 @@
+{
+  "name": "vmx-router",
+  "version": "1.0.0",
+  "description": "Vue Router Module for Vue Module Extension Framework",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kmtong/vmx-router"
+  },
+  "keywords": [
+    "plugin",
+    "module"
+  ],
+  "author": "kmtong@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "vue-router": "^3.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
+}
