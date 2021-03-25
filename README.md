@@ -56,3 +56,21 @@ const mod = {
 export default mod
 ```
 
+## Register an Extension of "routeFn"
+
+```js
+import MyLayout from './layout.vue'
+
+const mod = {
+    name: "layoutModule",
+    dependsOn: ["router"],
+    extensions: {
+        "routeFn": () => ((route) => {
+            route.component = MyLayout
+        })
+    }
+}
+
+export default mod
+```
+

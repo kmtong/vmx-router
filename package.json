@@ -1,6 +1,6 @@
 {
   "name": "vmx-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue Router Module for Vue Module Extension Framework",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

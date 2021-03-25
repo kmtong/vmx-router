@@ -19,7 +19,25 @@ export default {
             } else {
                 registry.moduleVarAppend(ROUTER_MODULE, "routes", obj);
             }
-        }
+        },
+        // extend to augment any route if required
+        "routeFn": function ({ registry }, obj) {
+            if (Array.isArray(obj)) {
+                obj.forEach(o => {
+                    if (typeof(o) === 'function') {
+                        registry.moduleVarAppend(ROUTER_MODULE, "routeFn", o);
+                    } else {
+                        console.error("Extension routesFn not a function", obj)
+                    }
+                });
+            } else {
+                if (typeof(obj) === 'function') {
+                    registry.moduleVarAppend(ROUTER_MODULE, "routeFn", obj);
+                } else {
+                    console.error("Extension routeFn not a function", obj)
+                }
+            }
+        },
     },
     start({ vue, registry }) {
         vue.use(VueRouter)
@@ -28,7 +46,7 @@ export default {
         // calculate config routes + extended routes
         const predefRoutes = (routerConfig && routerConfig.routes) ? routerConfig.routes : [];
         const extRoutes = registry.moduleVarGet(ROUTER_MODULE, "routes");
-        routes = predefRoutes.concat(extRoutes ? extRoutes : []);
+        routes = this.applyRouteFns(predefRoutes.concat(extRoutes ? extRoutes : []), registry.moduleVarGet(ROUTER_MODULE, "routeFn"));
 
         // scrollBehavior
         const scrollBehavior = (routerConfig && routerConfig.scrollBehavior) ? routerConfig.scrollBehavior : null;
@@ -57,6 +75,16 @@ export default {
      * Return all routes used to configure router
      */
     routes() {
+        return routes;
+    },
+    applyRouteFns(routes, fns) {
+        if (fns) {
+            let fixRoutes = routes;
+            fns.forEach(fn => {
+                fixRoutes = fixRoutes.map(r => fn(r));
+            });
+            return fixRoutes
+        }
         return routes;
     }
 }
