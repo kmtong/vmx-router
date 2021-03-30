@@ -9,9 +9,11 @@ import SomeModule from './somemodule'
 // app
 import App from './App.vue'
 
-Vue.config.productionTip = false
+// vue3-style
+const app = createApp(App)
 
-Vue.use(VueModx, {modules: [RouterModule, SomeModule], config: {
+// start plugin framework
+app.use(VueModx, {modules: [RouterModule, SomeModule], config: {
     router: {
         routes: [], // predefined routes if any
         scrollBehavior: () => ({ y: 0 }), // see https://router.vuejs.org/guide/advanced/scroll-behavior.html#async-scrolling
@@ -19,13 +21,7 @@ Vue.use(VueModx, {modules: [RouterModule, SomeModule], config: {
     }
 }})
 
-// get router object from module
-const router = RouterModule.router();
-
-new Vue({
-  router, // router to be initialized to vue instance
-  render: h => h(App),
-}).$mount('#app')
+app.mount('#app')
 
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "vmx-router",
-  "version": "1.0.1",
+  "version": "3.0.0",
   "description": "Vue Router Module for Vue Module Extension Framework",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   "author": "kmtong@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "vue-router": "^3.4.3"
+    "vue-router": "^4.0.5"
   },
   "devDependencies": {
     "typescript": "^2.7.2"
